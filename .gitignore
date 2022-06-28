@@ -1,0 +1,7 @@
+# Carpetas ignoradas
+
+env/
+
+# Archivos ignorados
+
+fonolac/secret.json
