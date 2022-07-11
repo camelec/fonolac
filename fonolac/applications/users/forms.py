@@ -89,3 +89,20 @@ class UpdatePasswordForm(forms.Form):
             }
         )
     )
+
+class VerificationForm(forms.Form):
+    codregistro = forms.CharField(required=True)
+
+    def clean_codregistro(self):
+        codigo = self.cleaned_data['codregistro']
+
+        if len(codigo) == 6:
+            # Verificamos el código y el id de usuario son válidos:
+            activo = User.objetcs.cod_validation(
+                self.kwargs['pk'],
+                codigo
+            )
+            if not activo:
+                raise forms.ValidationError('Los datos de ususrio no son correctos')
+        else:
+            raise forms.ValidationError('Los datos de ususrio no son correctos')

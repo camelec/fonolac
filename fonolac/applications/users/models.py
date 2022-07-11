@@ -13,11 +13,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     }
 
     username = models.CharField(max_length=10, unique=True)
-    email = models.EmailField()
+    email = models.EmailField() # unique=True para no repetir correos en usuaruarios
     nombres = models.CharField(max_length=30, blank=True)
     apellidos = models.CharField(max_length=30, blank=True)
     genero = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    codregistro = models.CharField(max_length=6, blank=True, default='000000')
+    #
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
 
