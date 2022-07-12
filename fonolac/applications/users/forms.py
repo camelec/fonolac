@@ -93,6 +93,10 @@ class UpdatePasswordForm(forms.Form):
 class VerificationForm(forms.Form):
     codregistro = forms.CharField(required=True)
 
+    def __init__(self, pk, *args, **kwargs):
+        self.id_user = pk
+        super(VerificationForm, self).__init__(*args, **kwargs)
+
     def clean_codregistro(self):
         codigo = self.cleaned_data['codregistro']
 
